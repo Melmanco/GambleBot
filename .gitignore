@@ -4,6 +4,7 @@ Thumbs.db
 .classpath
 .project
 
+.settings
 *.jar
 *.war
 *.ear
