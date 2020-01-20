@@ -3,6 +3,7 @@ package de.drdelay.aobots.common.utils;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static de.drdelay.aobots.common.utils.DelayService.waitTime;
 
@@ -36,6 +37,10 @@ public class HumanEmulatingRobot extends Robot {
         this.mouseMove(to.x, to.y);
     }
 
+    public int randomHumanity(int ms) {
+    	return ThreadLocalRandom.current().nextInt(ms - 10, ms + 11);
+    }
+    
     public void click() {
         this.mousePress(InputEvent.BUTTON1_MASK);
         waitTime(45);
