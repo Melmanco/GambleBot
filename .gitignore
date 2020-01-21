@@ -1,10 +1,12 @@
 Thumbs.db
 
+.settings
+TODO
+
 *.class
 .classpath
 .project
 
-.settings
 *.jar
 *.war
 *.ear
