@@ -73,6 +73,7 @@ public class GambleBot implements AbortsOnEsc {
         loopWeapons();
     }
 
+    // Loops through weapons to be enchanted
     private void loopWeapons() {
         logger.setStatus("Running");
         for (int itemi = 0; itemi < numberW; itemi++) {
@@ -88,6 +89,7 @@ public class GambleBot implements AbortsOnEsc {
         logger.setStatus("Done");
     }
 
+    // Sets gambling mode by reading fixlist
     private void checkGambleModeByFixes() {
         if (prefixImg.isEmpty()) {
             logger.addLogLine("Not gambling prefixes because empty fixlist");
@@ -100,6 +102,7 @@ public class GambleBot implements AbortsOnEsc {
         }
     }
 
+    // Loops gambling until enchants are found
     private void gambleWeapon() {
         boolean fresh = true;
         while (!prefixFound || !suffixFound) {
@@ -143,11 +146,13 @@ public class GambleBot implements AbortsOnEsc {
         logger.setStatus("Created");
     }
 
+    // Puts cursor in item to check if enchant is done
     private void enchantDone() {
         robot.moveHuman(item, 120);
         //waitTime(3380); // WarOfTheSky
     }
 
+    // Puts fixes remover in lab
     private void removeFixes(boolean fresh) {
         if (fresh) {
             robot.mouseMove(itemIn.x, itemIn.y);
@@ -184,6 +189,7 @@ public class GambleBot implements AbortsOnEsc {
         enchantDone();
     }
 
+    // Puts fixes in lab
     private void addFixes() {
         if (prefixFound && suffixFound) {
             return;
@@ -245,6 +251,7 @@ public class GambleBot implements AbortsOnEsc {
         }
     }
 
+    // Sets items and buttons positions
     private void init() {
         BufferedImage screen = robot.screenShot();
 
@@ -278,6 +285,7 @@ public class GambleBot implements AbortsOnEsc {
         logger.addLogLine("SourceIn assumed (relative to searcheye-pos) at " + sourceIn.getX() + "/" + sourceIn.getY());
     }
 
+    // Checks if desired fixes are found
     private void checkFixes() {
         BufferedImage itemname = findItemName();
         int middle = itemname.getWidth() / 2;
@@ -305,6 +313,7 @@ public class GambleBot implements AbortsOnEsc {
         waitTime(showdelay);
     }
 
+    // Loads prefixes and suffixes
     private void loadCfg() {
         ArrayList<String> prefixes = new ArrayList<>();
         ArrayList<String> suffixes = new ArrayList<>();
@@ -334,6 +343,7 @@ public class GambleBot implements AbortsOnEsc {
         suffixImg.addAll(suffixes.stream().map(FS::loadRequiredImage).collect(Collectors.toList()));
     }
 
+    // Tries to find again in case there's a bug
     private BufferedImage findItemName() {
         BufferedImage screen = findItemNameOnScreen();
         if (screen == null) {
@@ -351,6 +361,7 @@ public class GambleBot implements AbortsOnEsc {
         return screen;
     }
 
+    // Finds 'Enchant:' on screen
     private BufferedImage findItemNameOnScreen() {
         BufferedImage screen = robot.screenShot();
         int xoff = itemIn.x - 15;
@@ -363,6 +374,7 @@ public class GambleBot implements AbortsOnEsc {
         return screen.getSubimage(Math.max(enPos.x - 154, 0), enPos.y + 18, 334, 22);
     }
 
+    // Enchants and gets items back
     private void factor() {
         checkExit();
         robot.mouseMove(factor.x, factor.y);

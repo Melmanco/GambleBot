@@ -23,6 +23,7 @@ public class Program {
 
     }
 
+    // Sets all settings from config.properties and starts gambling
     private static void run(String itemPosOverride) {
 
         Properties defaultProperties = new Properties();
